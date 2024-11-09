@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  fe_app:
+    build: 
+      context: ../src  # srcディレクトリをビルドコンテキストに指定
+      dockerfile: ../docker/frontend/Dockerfile  # Dockerfileのパスを指定
+    container_name: sys-db-fe
+    volumes:
+      - ../src:/src  # srcディレクトリをコンテナ内の/srcにマウント
+    ports:
+      - "3000:3000"
+      - "6767:6767"
+    tty: true
+    networks:
+      - db_network
+
+networks:
+  db_network:
+    external: true
